@@ -30,7 +30,7 @@ func Test_sumsTo(t *testing.T) {
 				},
 			},
 			want:    [2]int{
-				1721, 299,
+				299, 1721,
 			},
 			wantErr: false,
 		},

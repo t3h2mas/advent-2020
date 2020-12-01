@@ -7,8 +7,13 @@ import "errors"
  * Specifically, they need you to find the two entries that sum to 2020 and then multiply those two numbers together.
  */
 
-func FixReport(entries []int) int {
-	return 0
+func FixReport(entries []int) (int, error) {
+	components, err := sumsTo(2000, entries)
+	if err != nil {
+		return 0, err
+	}
+
+	return components[0] * components[1], nil
 }
 
 func sumsTo(target int, search []int) ([2]int, error) {

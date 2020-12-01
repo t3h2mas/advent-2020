@@ -13,7 +13,17 @@ func main() {
 		panic(err)
 	}
 
-	solution, err := expenses.FixReport(expenseEntries)
+	fmt.Println("Day one, part one:")
+	solution, err := expenses.FixReportPartOne(expenseEntries)
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("solution: %d\n", solution)
+
+	fmt.Println("Day one, part two:")
+	solution, err = expenses.FixReportPartTwo(expenseEntries)
 
 	if err != nil {
 		panic(err)

@@ -5,10 +5,6 @@ import (
 	"strings"
 )
 
-type Validator interface {
-	Validate(corporatePassword *CorporatePassword) bool
-}
-
 type PasswordPolicy struct {
 	min  int
 	max  int
@@ -16,17 +12,8 @@ type PasswordPolicy struct {
 }
 
 type CorporatePassword struct {
-	password  string
-	policy    *PasswordPolicy
-	validator Validator
-}
-
-func (cp *CorporatePassword) WithValidator(validator Validator) {
-	cp.validator = validator
-}
-
-func (cp *CorporatePassword) IsValid() bool {
-	return cp.validator.Validate(cp)
+	password string
+	policy   *PasswordPolicy
 }
 
 // parse 1-3 b: cdefg into corporate password

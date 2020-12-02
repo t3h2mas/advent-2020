@@ -1,14 +1,16 @@
 package passwords
 
+type Validator interface {
+	Validate(corporatePassword *CorporatePassword) bool
+}
+
 func ValidPasswordsByPolicy(entries []string, validator Validator) int {
 	validCount := 0
 
 	for _, entry := range entries {
 		corporatePassword := corporatePasswordFrom(entry)
 
-		corporatePassword.WithValidator(validator)
-
-		if corporatePassword.IsValid() {
+		if validator.Validate(corporatePassword) {
 			validCount++
 		}
 	}

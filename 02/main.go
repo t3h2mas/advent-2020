@@ -14,7 +14,12 @@ func main() {
 	}
 
 	fmt.Println("Day two, part one")
-	solution := passwords.ValidPasswordsByPolicy(passwordEntries)
+	solution := passwords.ValidPasswordsByPolicy(passwordEntries, &passwords.ContainsValidator{})
+
+	fmt.Printf("solution: %d\n", solution)
+
+	fmt.Println("Day two, part two")
+	solution = passwords.ValidPasswordsByPolicy(passwordEntries, &passwords.PositionValidator{})
 
 	fmt.Printf("solution: %d\n", solution)
 }

@@ -14,7 +14,15 @@ func (p *Pass) SeatID() int {
 	return p.row*8 + p.col
 }
 
-func NewPass(seat string) (*Pass, error) {
+func (p *Pass) Row() int {
+	return p.row
+}
+
+func (p *Pass) Col() int {
+	return p.col
+}
+
+func PassFrom(seat string) (*Pass, error) {
 	// convert seat to binary string F:0, B: 1, R: 1, L: 0
 
 	bin := seatAsBinary(seat)
@@ -30,10 +38,14 @@ func NewPass(seat string) (*Pass, error) {
 		return nil, err
 	}
 
+	return NewPass(row, col), nil
+}
+
+func NewPass(row, col int) *Pass {
 	return &Pass{
 		row,
 		col,
-	}, nil
+	}
 }
 
 func seatAsBinary(seat string) string {

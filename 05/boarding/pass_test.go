@@ -38,16 +38,16 @@ func TestNewPass(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := NewPass(tt.args.seat)
+			got, err := PassFrom(tt.args.seat)
 
 			haveError := err != nil
 
 			if haveError != tt.wantError {
-				t.Errorf("NewPass() unexpected error: %s", err.Error())
+				t.Errorf("PassFrom() unexpected error: %s", err.Error())
 			}
 
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("NewPass() = %v, want %v", got, tt.want)
+				t.Errorf("PassFrom() = %v, want %v", got, tt.want)
 			}
 		})
 	}

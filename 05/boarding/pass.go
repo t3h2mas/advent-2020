@@ -17,18 +17,7 @@ func (p *Pass) SeatID() int {
 func NewPass(seat string) (*Pass, error) {
 	// convert seat to binary string F:0, B: 1, R: 1, L: 0
 
-	var b strings.Builder
-	for _, ch := range seat {
-		if ch == 'F' || ch == 'L' {
-			b.WriteRune('0')
-		}
-
-		if ch == 'B' || ch == 'R' {
-			b.WriteRune('1')
-		}
-	}
-
-	bin := b.String()
+	bin := seatAsBinary(seat)
 
 	row, err := calculateRow(bin)
 
@@ -45,6 +34,22 @@ func NewPass(seat string) (*Pass, error) {
 		row,
 		col,
 	}, nil
+}
+
+func seatAsBinary(seat string) string {
+	var b strings.Builder
+	for _, ch := range seat {
+		if ch == 'F' || ch == 'L' {
+			b.WriteRune('0')
+		}
+
+		if ch == 'B' || ch == 'R' {
+			b.WriteRune('1')
+		}
+	}
+
+	bin := b.String()
+	return bin
 }
 
 func calculateRow(seat string) (int, error) {

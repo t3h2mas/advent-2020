@@ -52,3 +52,35 @@ func TestNewPass(t *testing.T) {
 		})
 	}
 }
+
+func TestPass_SeatID(t *testing.T) {
+	type fields struct {
+		row int
+		col int
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   int
+	}{
+		{
+			name: "it should calculate the seat id",
+			fields: fields{
+				row: 44,
+				col: 5,
+			},
+			want: 357,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			p := &Pass{
+				row: tt.fields.row,
+				col: tt.fields.col,
+			}
+			if got := p.SeatID(); got != tt.want {
+				t.Errorf("SeatID() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

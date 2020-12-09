@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 
+	"github.com/t3h2mas/advent-2020/07/graph"
+
 	"github.com/t3h2mas/advent-2020/07/solution"
 
 	"github.com/t3h2mas/advent-2020/07/luggage"
@@ -72,4 +74,11 @@ func main() {
 	}
 
 	fmt.Printf("solution: %d\n", containingTarget)
+
+	fmt.Println("Day seven, part two")
+	weightedDigraph := solution.GraphFromInput(bagRuleLines)
+
+	target := weightedDigraph.Get("shiny gold")
+	fmt.Printf("solution: %d\n", graph.ComputeAggregateWeight(target))
+
 }

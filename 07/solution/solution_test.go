@@ -3,6 +3,8 @@ package solution
 import (
 	"reflect"
 	"testing"
+
+	"github.com/t3h2mas/advent-2020/07/graph"
 )
 
 func TestLineParts(t *testing.T) {
@@ -78,5 +80,29 @@ func TestBagClauses(t *testing.T) {
 				t.Errorf("BagClauses() = %v, want %v", got, tt.want)
 			}
 		})
+	}
+}
+
+func TestGraphFromInput(t *testing.T) {
+	input := []string{
+		"shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.",
+		"dark olive bags contain 3 faded blue bags, 4 dotted black bags.",
+		"vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.",
+		"faded blue bags contain no other bags.",
+		"dotted black bags contain no other bags.",
+	}
+
+	expected := graph.NewDigraph()
+	expected.AddEdge("shiny gold", "dark olive", 1)
+	expected.AddEdge("shiny gold", "vibrant plum", 2)
+	expected.AddEdge("vibrant plum", "faded blue", 5)
+	expected.AddEdge("vibrant plum", "dotted black", 6)
+	expected.AddEdge("dark olive", "faded blue", 3)
+	expected.AddEdge("dark olive", "dotted black", 4)
+
+	got := GraphFromInput(input)
+
+	if !reflect.DeepEqual(got, expected) {
+		t.Errorf("GraphFromInput() = %#v\nwant %#v", got, expected)
 	}
 }

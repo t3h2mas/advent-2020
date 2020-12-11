@@ -30,14 +30,8 @@ func voltageDifferences(adapters []int, differences map[int]int) map[int]int {
 }
 
 func ChainPossibilities(adapters []int) int {
-	sort.Ints(adapters)
-	// add the outlet device voltage of 0
-	adapters = append([]int{0}, adapters...)
-
-	// add the built in adapter voltage of 3 + the max voltage
-	adapters = append(adapters, adapters[len(adapters)-1]+3)
-
-	available := make([]int, adapters[len(adapters)-1]+1)
+	maxVoltage := max(adapters)
+	available := make([]int, maxVoltage+1)
 
 	for _, voltage := range adapters {
 		available[voltage] = 1

@@ -17,4 +17,7 @@ func main() {
 
 	fmt.Println("Day ten, part one")
 	fmt.Printf("solution: %d\n", charging.ChainVoltageDifferences(adapters))
+
+	fmt.Println("Day ten, part two")
+	fmt.Printf("solution: %d\n", charging.ChainPossibilities(adapters))
 }

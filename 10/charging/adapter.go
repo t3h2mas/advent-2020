@@ -2,8 +2,6 @@ package charging
 
 import (
 	"sort"
-
-	"github.com/t3h2mas/advent-2020/types"
 )
 
 func ChainVoltageDifferences(adapters []int) int {
@@ -39,38 +37,43 @@ func ChainPossibilities(adapters []int) int {
 	// add the built in adapter voltage of 3 + the max voltage
 	adapters = append(adapters, adapters[len(adapters)-1]+3)
 
-	available := types.NewIntSet()
+	available := make([]int, adapters[len(adapters)-1]+1)
 
 	for _, voltage := range adapters {
-		available.Add(voltage)
+		available[voltage] = 1
 	}
 
-	dp := make([]int, len(adapters))
+	dp := make([]int, len(available))
 	dp[0] = 1
-	dp[1] = 1
-	dp[2] = 2
 
-	for i := 3; i < len(adapters); i++ {
+	for i := 1; i < len(available); i++ {
+		if available[i] == 0 {
+			continue
+		}
 		for j := 1; j < 4; j++ {
-			if available.Has(adapters[i] - j) {
+			if i-j < 0 {
+				continue
+			}
+			// skip voltages that don't match an adapter
+			if available[i] == 0 {
+				dp[i] = 0
+			} else {
 				dp[i] += dp[(i - j)]
 			}
 		}
-
 	}
 
-	//return dp[len(available)-1]
-	return max(dp)
+	return dp[len(available)-1]
 }
 
-func max(xs []int) int {
-	result := xs[0]
+func max(nums []int) int {
+	m := nums[0]
 
-	for _, n := range xs {
-		if n > result {
-			result = n
+	for _, n := range nums {
+		if n > m {
+			m = n
 		}
 	}
 
-	return result
+	return m
 }

@@ -38,6 +38,32 @@ func ChainPossibilities(adapters []int) int {
 	// add the built in adapter voltage of 3 + the max voltage
 	adapters = append(adapters, adapters[len(adapters)-1]+3)
 
+	available := make([]int, adapters[len(adapters)-1]+1)
+
+	for _, voltage := range adapters {
+		available[voltage] = 1
+	}
+
+	dp := make([]int, len(available))
+	dp[0] = 1
+	dp[1] = 1
+
+	for i := 2; i < len(available); i++ {
+		for j := 1; j < 4; j++ {
+			if i-j < 0 {
+				continue
+			}
+
+			if available[i-1] == 0 {
+				dp[i] = 0
+			} else {
+				dp[i] += dp[(i - j)]
+			}
+		}
+	}
+
 	fmt.Printf("%+v\n", adapters)
-	return 0
+	fmt.Printf("%+v\n", available)
+	fmt.Printf("%+v\n", dp)
+	return dp[len(available)-1]
 }

@@ -29,6 +29,11 @@ func voltageDifferences(adapters []int, differences map[int]int) map[int]int {
 	return voltageDifferences(adapters[1:], differences)
 }
 
+// Dynamic programming approach to day ten, part two
+// "What is the total number of distinct ways you can arrange the adapters to connect the charging outlet to your device?"
+// This approach is a variant of the 'climb k stairs, skip red' problem set. Instead of a list of "red" spaces, we use
+// the `available` list as a whitelist of voltages that have an adapter.
+// Using this approach gives us a runtime of O(n * 3) or O(n)
 func ChainPossibilities(adapters []int) int {
 	maxVoltage := max(adapters)
 	available := make([]int, maxVoltage+1)
@@ -36,6 +41,11 @@ func ChainPossibilities(adapters []int) int {
 	for _, voltage := range adapters {
 		available[voltage] = 1
 	}
+
+	// given adapters of [1, 4, 5]
+	// available has a length of 6 and would look like
+	// index:  0  1  2  3  4  5
+	// value: [0, 1, 0, 0, 1, 1]
 
 	dp := make([]int, len(available))
 	dp[0] = 1

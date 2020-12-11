@@ -2,6 +2,8 @@ package charging
 
 import (
 	"sort"
+
+	"github.com/t3h2mas/advent-2020/types"
 )
 
 func ChainVoltageDifferences(adapters []int) int {
@@ -32,34 +34,30 @@ func voltageDifferences(adapters []int, differences map[int]int) map[int]int {
 // Dynamic programming approach to day ten, part two
 // "What is the total number of distinct ways you can arrange the adapters to connect the charging outlet to your device?"
 // This approach is a variant of the 'climb k stairs, skip red' problem set. Instead of a list of "red" spaces, we use
-// the `available` list as a whitelist of voltages that have an adapter.
+// the `available` set as a whitelist of voltages that have an adapter.
 // Using this approach gives us a runtime of O(n * 3) or O(n)
 func ChainPossibilities(adapters []int) int {
 	maxVoltage := max(adapters)
-	available := make([]int, maxVoltage+1)
+
+	// voltages that have an adapter
+	available := types.NewIntSet()
 
 	for _, voltage := range adapters {
-		available[voltage] = 1
+		available.Add(voltage)
 	}
 
-	// given adapters of [1, 4, 5]
-	// available has a length of 6 and would look like
-	// index:  0  1  2  3  4  5
-	// value: [0, 1, 0, 0, 1, 1]
+	dp := make([]int, maxVoltage+1)
 
-	dp := make([]int, len(available))
+	// base case, there is only one way to get to the first spot
 	dp[0] = 1
 
-	for i := 1; i < len(available); i++ {
-		if available[i] == 0 {
-			continue
-		}
+	for i := 1; i <= maxVoltage; i++ {
 		for j := 1; j < 4; j++ {
 			if i-j < 0 {
 				continue
 			}
 			// skip voltages that don't match an adapter
-			if available[i] == 0 {
+			if !available.Has(i) {
 				dp[i] = 0
 			} else {
 				dp[i] += dp[(i - j)]
@@ -67,7 +65,7 @@ func ChainPossibilities(adapters []int) int {
 		}
 	}
 
-	return dp[len(available)-1]
+	return dp[maxVoltage]
 }
 
 func max(nums []int) int {

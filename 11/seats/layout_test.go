@@ -12,7 +12,7 @@ func TestLayoutFrom(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want *Layout
+		want Layout
 	}{
 		{
 			name: "should build a layout from a multiline grid",
@@ -22,7 +22,7 @@ func TestLayoutFrom(t *testing.T) {
 					"LLL",
 				},
 			},
-			want: &Layout{
+			want: Layout{
 				height:   2,
 				width:    3,
 				occupied: map[Point]bool{},

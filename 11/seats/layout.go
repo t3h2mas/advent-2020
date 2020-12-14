@@ -1,37 +1,5 @@
 package seats
 
-type Point struct {
-	x int
-	y int
-}
-
-func (p Point) X() int {
-	return p.x
-}
-
-func (p Point) Y() int {
-	return p.y
-}
-
-func NewPoint(x, y int) Point {
-	return Point{x, y}
-}
-
-type PointSet map[Point]bool
-
-func NewPointSet() PointSet {
-	return make(map[Point]bool)
-}
-
-func (s PointSet) Has(val Point) bool {
-	_, exists := s[val]
-	return exists
-}
-
-func (s PointSet) Add(val Point) {
-	s[val] = true
-}
-
 type Layout struct {
 	height   int
 	width    int
@@ -39,26 +7,25 @@ type Layout struct {
 	floor    PointSet
 }
 
-func newLayout() *Layout {
-	return &Layout{
+func newLayout(height int, width int) Layout {
+	return Layout{
+		height:   height,
+		width:    width,
 		occupied: NewPointSet(),
 		floor:    NewPointSet(),
 	}
 }
 
-func (l *Layout) setHeight(val int) {
+func (l Layout) setHeight(val int) {
 	l.height = val
 }
 
-func (l *Layout) setWidth(val int) {
+func (l Layout) setWidth(val int) {
 	l.width = val
 }
 
-func LayoutFrom(grid []string) *Layout {
-	result := newLayout()
-
-	result.setHeight(len(grid))
-	result.setWidth(len(grid[0]))
+func LayoutFrom(grid []string) Layout {
+	result := newLayout(len(grid), len(grid[0]))
 
 	for y := range grid {
 		for x := range grid[y] {
@@ -66,6 +33,9 @@ func LayoutFrom(grid []string) *Layout {
 			case '.':
 				p := NewPoint(x, y)
 				result.floor.Add(p)
+			case '#':
+				p := NewPoint(x, y)
+				result.occupied.Add(p)
 			}
 		}
 	}

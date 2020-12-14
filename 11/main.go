@@ -18,6 +18,10 @@ func main() {
 	fmt.Println("Day eleven, part one")
 	layout := seats.LayoutFrom(gridLines)
 	occupied := seats.SimulateStableOccupiedSeatCount(layout)
+	fmt.Printf("solution: %d\n", occupied)
 
+	fmt.Println("Day eleven, part two")
+	layout = seats.LayoutFrom(gridLines)
+	occupied = seats.SimulateStableOccupiedLineOfSightSeatCount(layout)
 	fmt.Printf("solution: %d\n", occupied)
 }

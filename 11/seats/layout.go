@@ -42,3 +42,14 @@ func LayoutFrom(grid []string) Layout {
 
 	return result
 }
+
+func (l Layout) SeatOutOfBounds(seat Point) bool {
+	if seat.X() < 0 || seat.X() >= l.width {
+		return true
+	}
+
+	if seat.Y() < 0 || seat.Y() >= l.height {
+		return true
+	}
+	return false
+}

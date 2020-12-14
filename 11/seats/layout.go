@@ -33,26 +33,38 @@ func (s PointSet) Add(val Point) {
 }
 
 type Layout struct {
-	occupied []Point
+	height   int
+	width    int
+	occupied PointSet
 	floor    PointSet
 }
 
-func NewLayout() *Layout {
+func newLayout() *Layout {
 	return &Layout{
-		occupied: []Point{},
+		occupied: NewPointSet(),
 		floor:    NewPointSet(),
 	}
 }
 
+func (l *Layout) setHeight(val int) {
+	l.height = val
+}
+
+func (l *Layout) setWidth(val int) {
+	l.width = val
+}
+
 func LayoutFrom(grid []string) *Layout {
-	result := NewLayout()
+	result := newLayout()
+
+	result.setHeight(len(grid))
+	result.setWidth(len(grid[0]))
+
 	for y := range grid {
 		for x := range grid[y] {
-			p := NewPoint(x, y)
 			switch grid[y][x] {
-			case 'L':
-				result.occupied = append(result.occupied, p)
 			case '.':
+				p := NewPoint(x, y)
 				result.floor.Add(p)
 			}
 		}

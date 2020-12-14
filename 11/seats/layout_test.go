@@ -23,13 +23,9 @@ func TestLayoutFrom(t *testing.T) {
 				},
 			},
 			want: &Layout{
-				occupied: []Point{
-					{0, 0},
-					{2, 0},
-					{0, 1},
-					{1, 1},
-					{2, 1},
-				},
+				height:   2,
+				width:    3,
+				occupied: map[Point]bool{},
 				floor: map[Point]bool{
 					{1, 0}: true,
 				},

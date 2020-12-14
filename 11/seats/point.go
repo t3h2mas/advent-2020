@@ -1,5 +1,7 @@
 package seats
 
+import "fmt"
+
 type Point struct {
 	x int
 	y int
@@ -34,4 +36,8 @@ func (s PointSet) Add(val Point) {
 
 func (s PointSet) Remove(val Point) {
 	delete(s, val)
+}
+
+func (s PointSet) Equals(other PointSet) bool {
+	return fmt.Sprint(s) == fmt.Sprint(other)
 }

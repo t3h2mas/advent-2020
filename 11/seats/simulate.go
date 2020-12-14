@@ -66,3 +66,17 @@ func calculateOccupied(layout Layout) PointSet {
 
 	return result
 }
+
+func SimulateStableOccupiedSeatCount(layout Layout) int {
+	for {
+		nextOccupiedSeats := calculateOccupied(layout)
+
+		if layout.occupied.Equals(nextOccupiedSeats) {
+			break
+		}
+
+		layout.occupied = nextOccupiedSeats
+	}
+
+	return len(layout.occupied)
+}

@@ -30,4 +30,17 @@ func main() {
 	result := math.Abs(float64(pos.X())) + math.Abs(float64(pos.Y()))
 
 	fmt.Printf("solution %d\n", int(result))
+
+	fmt.Println("Day twelve, part two")
+	ws := ship.NewWaypointShip()
+	for _, actionInput := range actions {
+		a := action.NewActionFrom(actionInput)
+
+		ws.Act(a.Type(), a.Units())
+	}
+
+	pos = ws.ShipPosition()
+
+	result = math.Abs(float64(pos.X())) + math.Abs(float64(pos.Y()))
+	fmt.Printf("solution %d\n", int(result))
 }

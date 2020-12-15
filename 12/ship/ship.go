@@ -1,18 +1,5 @@
 package ship
 
-type Position struct {
-	x int
-	y int
-}
-
-func (p Position) X() int {
-	return p.x
-}
-
-func (p Position) Y() int {
-	return p.y
-}
-
 type Ship struct {
 	facing   CardinalDirection
 	position Position

@@ -5,9 +5,21 @@ type Position struct {
 	y int
 }
 
+func (p Position) X() int {
+	return p.x
+}
+
+func (p Position) Y() int {
+	return p.y
+}
+
 type Ship struct {
 	facing   CardinalDirection
 	position Position
+}
+
+func (s *Ship) Position() Position {
+	return s.position
 }
 
 func (s *Ship) faceTowards(d CardinalDirection) {

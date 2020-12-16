@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"strconv"
+
+	"github.com/t3h2mas/advent-2020/13/bus"
 
 	"github.com/t3h2mas/advent-2020/input"
 )
@@ -13,7 +16,16 @@ func main() {
 		panic(err)
 	}
 
-	for idx, note := range notes {
-		fmt.Printf("%d: '%s'\n", idx, note)
+	fmt.Println("Day thirteen, part one")
+	earliestDeparture, err := strconv.Atoi(notes[0])
+	if err != nil {
+		panic(err)
 	}
+
+	buses := bus.BusesFrom(notes[1])
+
+	departure := bus.ClosestDeparture(buses, earliestDeparture)
+
+	minutesToWait := departure.Time() - earliestDeparture
+	fmt.Printf("solution: %d\n", minutesToWait*departure.BusID())
 }

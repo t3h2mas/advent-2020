@@ -9,8 +9,8 @@ type Bus struct {
 	id int
 }
 
-func NewBus(id int) Bus {
-	return Bus{id}
+func (b Bus) ID() int {
+	return b.id
 }
 
 func BusesFrom(input string) []Bus {

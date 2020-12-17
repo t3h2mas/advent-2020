@@ -31,3 +31,22 @@ func BusesFrom(input string) []Bus {
 
 	return result
 }
+
+func IndexedBusesFrom(input string) map[int]Bus {
+	result := make(map[int]Bus)
+
+	for idx, bid := range strings.Split(input, ",") {
+		if bid == "x" {
+			continue
+		}
+
+		parsed, err := strconv.Atoi(bid)
+		if err != nil {
+			panic(err)
+		}
+
+		result[idx] = Bus{id: parsed}
+	}
+
+	return result
+}

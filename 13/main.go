@@ -28,4 +28,10 @@ func main() {
 
 	minutesToWait := departure.Time() - minTargetDeparture
 	fmt.Printf("solution: %d\n", minutesToWait*departure.BusID())
+
+	// What is the earliest timestamp such that all of the listed bus IDs depart at offsets matching their positions in the list?
+	fmt.Println("Day thirteen, part two")
+	indexedBuses := bus.IndexedBusesFrom(notes[1])
+
+	fmt.Printf("solution: %d\n", bus.EarliestOrderedDeparture(indexedBuses))
 }

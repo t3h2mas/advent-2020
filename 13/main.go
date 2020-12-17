@@ -17,15 +17,15 @@ func main() {
 	}
 
 	fmt.Println("Day thirteen, part one")
-	earliestDeparture, err := strconv.Atoi(notes[0])
+	minTargetDeparture, err := strconv.Atoi(notes[0])
 	if err != nil {
 		panic(err)
 	}
 
 	buses := bus.BusesFrom(notes[1])
 
-	departure := bus.ClosestDeparture(buses, earliestDeparture)
+	departure := bus.ClosestDeparture(buses, minTargetDeparture)
 
-	minutesToWait := departure.Time() - earliestDeparture
+	minutesToWait := departure.Time() - minTargetDeparture
 	fmt.Printf("solution: %d\n", minutesToWait*departure.BusID())
 }

@@ -1,5 +1,11 @@
 package bus
 
+import (
+	"math/big"
+
+	"github.com/t3h2mas/advent-2020/13/remainder"
+)
+
 type Departure struct {
 	busID int
 	time  int
@@ -43,35 +49,19 @@ func ClosestDeparture(buses []Bus, targetDeparture int) Departure {
 }
 
 func EarliestOrderedDeparture(buses map[int]Bus) int {
-	startingBus := buses[0]
+	var n []*big.Int
+	var a []*big.Int
 
-	multiple := 1
-	for {
-		timestamp := startingBus.ID() * multiple
-
-		match := true
-
-		for k, v := range buses {
-			// skip our startingBus
-			if k == 0 {
-				continue
-			}
-
-			targetTS := timestamp + k
-
-			if targetTS%v.ID() != 0 {
-				match = false
-				break
-			}
-
-		}
-
-		if match {
-			return timestamp
-		}
-
-		multiple++
+	for idx, bus := range buses {
+		a = append(a, big.NewInt(int64(bus.ID())))
+		n = append(n, big.NewInt(int64((-1*idx)%bus.ID())))
 	}
 
-	return 0
+	r, err := remainder.Crt(n, a)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return int(r.Int64())
 }

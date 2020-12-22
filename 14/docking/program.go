@@ -23,6 +23,10 @@ func (p Program) Memory() map[int]int {
 	return p.memory
 }
 
+func (p Program) WriteTo(address int, value int) {
+	p.memory[address] = value
+}
+
 func (p Program) Write(address int, value int, mask string) {
 	bValue := bstr(value)
 	for i := 0; i < 36; i++ {
@@ -43,5 +47,5 @@ func (p Program) Write(address int, value int, mask string) {
 		panic(err)
 	}
 
-	p.memory[address] = int(parsed)
+	p.WriteTo(address, int(parsed))
 }

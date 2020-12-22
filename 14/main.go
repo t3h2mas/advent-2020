@@ -11,7 +11,6 @@ import (
 	"github.com/t3h2mas/advent-2020/input"
 )
 
-// "mask = 01X0000010101001X1000000X0X000110101"
 func maskFor(s string) string {
 	parts := strings.Split(s, " ")
 
@@ -23,7 +22,6 @@ type writeCmd struct {
 	value   int
 }
 
-// mem[57918] = 102433847
 func writeCmdFor(s string) writeCmd {
 	re := regexp.MustCompile(`mem\[(\d+)\] = (\d+)`)
 	parts := re.FindStringSubmatch(s)
@@ -49,25 +47,52 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("Day fourteen, part one")
 
-	program := docking.NewProgram()
-	var mask string
-	for _, instruction := range commands {
-		if strings.HasPrefix(instruction, "mask") {
-			mask = maskFor(instruction)
-			continue
+	{
+		fmt.Println("Day fourteen, part one")
+		program := docking.NewProgram()
+		var mask string
+		for _, instruction := range commands {
+			if strings.HasPrefix(instruction, "mask") {
+				mask = maskFor(instruction)
+				continue
+			}
+
+			cmd := writeCmdFor(instruction)
+
+			program.Write(cmd.address, cmd.value, mask)
 		}
 
-		cmd := writeCmdFor(instruction)
+		sum := 0
+		for _, val := range program.Memory() {
+			sum += val
+		}
 
-		program.Write(cmd.address, cmd.value, mask)
+		fmt.Printf("solution: %d\n", sum)
 	}
 
-	sum := 0
-	for _, val := range program.Memory() {
-		sum += val
-	}
+	{
+		fmt.Println("Day fourteen, part two")
+		sum := 0
+		var mask string
+		program := docking.NewProgram()
+		for _, instruction := range commands {
+			if strings.HasPrefix(instruction, "mask") {
+				mask = maskFor(instruction)
+				continue
+			}
 
-	fmt.Printf("solution: %d\n", sum)
+			cmd := writeCmdFor(instruction)
+
+			addresses := docking.DecodeAddress(cmd.address, mask)
+			for _, address := range addresses {
+				program.WriteTo(address, cmd.value)
+			}
+		}
+		for _, val := range program.Memory() {
+			sum += val
+		}
+
+		fmt.Printf("solution: %d\n", sum)
+	}
 }

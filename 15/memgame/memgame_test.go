@@ -92,6 +92,14 @@ func TestSpokenAt(t *testing.T) {
 			},
 			want: 1836,
 		},
+		{
+			name: "thirty million example 1",
+			args: args{
+				startingNumbers: []int{0, 3, 6},
+				turn:            30000000,
+			},
+			want: 175594,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

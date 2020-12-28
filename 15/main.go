@@ -11,4 +11,7 @@ func main() {
 
 	fmt.Println("Day fifteen, part one")
 	fmt.Printf("solution: %d\n", memgame.SpokenAt(startingNumbers, 2020))
+
+	fmt.Println("Day fifteen, part two")
+	fmt.Printf("solution: %d\n", memgame.SpokenAt(startingNumbers, 30000000))
 }

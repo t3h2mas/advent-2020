@@ -30,8 +30,9 @@ func SpokenAt(startingNumbers []int, turn int) int {
 	}
 
 	for currentTurn <= turn {
-		// look at when the previous number was spoken
 		lastTurn := currentTurn - 1
+
+		// look at when the previous number was spoken
 		if turnSpoken, hasBeenSpoken := history.LastSpoken(lastSpoken); hasBeenSpoken {
 			// the last number has been spoken before, get the difference between turns
 			difference := lastTurn - turnSpoken

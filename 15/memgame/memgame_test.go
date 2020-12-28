@@ -37,7 +37,7 @@ func TestSpokenAt(t *testing.T) {
 			want: 0,
 		},
 		{
-			name: "example 1",
+			name: "2020 example 1",
 			args: args{
 				startingNumbers: []int{0, 3, 6},
 				turn:            2020,
@@ -45,7 +45,7 @@ func TestSpokenAt(t *testing.T) {
 			want: 436,
 		},
 		{
-			name: "example 2",
+			name: "2020 example 2",
 			args: args{
 				startingNumbers: []int{1, 3, 2},
 				turn:            2020,
@@ -53,7 +53,7 @@ func TestSpokenAt(t *testing.T) {
 			want: 1,
 		},
 		{
-			name: "example 3",
+			name: "2020 example 3",
 			args: args{
 				startingNumbers: []int{2, 1, 3},
 				turn:            2020,
@@ -61,7 +61,7 @@ func TestSpokenAt(t *testing.T) {
 			want: 10,
 		},
 		{
-			name: "example 4",
+			name: "2020 example 4",
 			args: args{
 				startingNumbers: []int{1, 2, 3},
 				turn:            2020,
@@ -69,7 +69,7 @@ func TestSpokenAt(t *testing.T) {
 			want: 27,
 		},
 		{
-			name: "example 5",
+			name: "2020 example 5",
 			args: args{
 				startingNumbers: []int{2, 3, 1},
 				turn:            2020,
@@ -77,7 +77,7 @@ func TestSpokenAt(t *testing.T) {
 			want: 78,
 		},
 		{
-			name: "example 6",
+			name: "2020 example 6",
 			args: args{
 				startingNumbers: []int{3, 2, 1},
 				turn:            2020,
@@ -85,7 +85,7 @@ func TestSpokenAt(t *testing.T) {
 			want: 438,
 		},
 		{
-			name: "example 7",
+			name: "2020 example 7",
 			args: args{
 				startingNumbers: []int{3, 1, 2},
 				turn:            2020,

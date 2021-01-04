@@ -23,7 +23,7 @@ func mustParseInt(s string) int {
 }
 
 func ParseRules(input string) []Rule {
-	re := regexp.MustCompile(`(\w+): (\d+)-(\d+) or (\d+)-(\d+)`)
+	re := regexp.MustCompile(`(\w+\s?\w+?): (\d+)-(\d+) or (\d+)-(\d+)`)
 
 	var results []Rule
 

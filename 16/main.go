@@ -17,4 +17,7 @@ func main() {
 
 	fmt.Println("Day sixteen, part one")
 	fmt.Printf("solution: %d\n", solution.TicketScanningErrorRate(problemInput))
+
+	fmt.Println("Day sixteen, part two")
+	fmt.Printf("solution: %d\n", solution.TicketDepartureProduct(problemInput))
 }

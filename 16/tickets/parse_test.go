@@ -21,6 +21,7 @@ func TestParse(t *testing.T) {
 				"class: 1-3 or 5-7",
 				"row: 6-11 or 33-44",
 				"seat: 13-40 or 45-50",
+				"departure time: 42-43 or 68-72",
 			}, "\n")},
 			want: []Rule{
 				{
@@ -42,6 +43,13 @@ func TestParse(t *testing.T) {
 					ranges: []intRange{
 						{13, 40},
 						{45, 50},
+					},
+				},
+				{
+					field: "departure time",
+					ranges: []intRange{
+						{42, 43},
+						{68, 72},
 					},
 				},
 			},

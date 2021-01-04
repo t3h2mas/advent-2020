@@ -23,3 +23,7 @@ func (r Rule) Valid(value int) bool {
 
 	return false
 }
+
+func (r Rule) Field() string {
+	return r.field
+}
